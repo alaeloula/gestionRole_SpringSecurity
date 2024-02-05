@@ -2,21 +2,32 @@ package com.example.demo.Services.Impl;
 
 
 import com.example.demo.Services.ReviewService;
+import com.example.demo.configuration.SpringSecurityConfig;
 import com.example.demo.model.Review;
+import com.example.demo.repository.DBUserRepository;
 import com.example.demo.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 @Service
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
-    public ReviewServiceImpl(ReviewRepository reviewRepository){
+    private final DBUserRepository userRepository;
+    public ReviewServiceImpl(ReviewRepository reviewRepository, DBUserRepository userRepository){
         this.reviewRepository = reviewRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public Review saveReview(Review review) {
+
+        var user = userRepository.findByUsername(
+                SpringSecurityConfig.getSessionUser()
+        ).get();
+        review.setUser(user);
+        review.setDate(LocalDate.now());
         return reviewRepository.save(review);
     }
 

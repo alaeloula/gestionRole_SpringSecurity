@@ -5,6 +5,31 @@
     <title>review</title>
 </head>
 <body>
-all reviews
+<h2>Liste des critiques</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Titre</th>
+        <th>Message</th>
+        <th>Réaction</th>
+        <th>action</th>
+        <!-- Ajoutez d'autres colonnes selon vos besoins -->
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Itération sur la liste des critiques -->
+    <tr th:each="review : ${reviews}">
+        <td th:text="${review.title}"></td>
+        <td th:text="${review.message}"></td>
+        <td th:text="${review.reaction}"></td>
+        <span th:if="${review.user.username == #authentication.name}">
+            <td>edit</td>
+            <td>sup</td>
+        </span>
+
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
