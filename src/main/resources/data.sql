@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS dbuser;
+DROP TABLE IF EXISTS dbuser CASCADE;
+
 
 CREATE TABLE dbuser (
                         id SERIAL,

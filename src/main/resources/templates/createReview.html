@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Form Review</h3>
+
+<div id="main" class="container-fluid">
+
+
+    <h2>Créer une nouvelle critique</h2>
+
+    <form th:object="${review}" th:action="@{/reviews/create}" method="post">
+        <label for="title">Titre de la critique:</label>
+        <input type="text" id="title" name="title" th:field="*{title}" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" th:field="*{message}" required></textarea>
+
+        <label for="reaction">Réaction:</label>
+        <select id="reaction" name="reaction" th:field="*{reaction}" required>
+            <option value="HAPPY">J'aime</option>
+            <option value="ANGRY">Je n'aime pas</option>
+            <!-- Ajoutez d'autres options selon vos besoins -->
+        </select>
+
+        <!-- Vous pouvez ajouter d'autres champs selon votre modèle -->
+
+        <button type="submit">Créer la critique</button>
+    </form>
+</div>
+</body>
+</html>
